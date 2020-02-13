@@ -1,4 +1,4 @@
-const jwtMiddleware = require("./jwt.middleware");
+import jwtMiddleware from "../middlewares/jwt.middleware";
 
 /* eslint-disable max-len */
 export default (routesWhiteList = []) => (req, res, next) =>

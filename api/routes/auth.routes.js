@@ -3,7 +3,6 @@ import * as authService from "../services/auth.service";
 import * as userService from "../services/user.service";
 import authenticationMiddleware from "../middlewares/authentication.middleware";
 import registrationMiddleware from "../middlewares/registration.middleware";
-import jwtMiddleware from "../middlewares/jwt.middleware";
 
 const router = Router();
 
@@ -20,9 +19,15 @@ router
       .then(data => res.send(data))
       .catch(next)
   )
-  .get("/user", jwtMiddleware, (req, res, next) =>
+  .get("/user", (req, res, next) =>
     userService
       .getUserById(req.user.id) // user added to the request in the jwt strategy, see passport config
+      .then(data => res.send(data))
+      .catch(next)
+  )
+  .delete("/user", (req, res, next) =>
+    userService
+      .deleteUser(req.user.id) // user added to the request in the jwt strategy, see passport config
       .then(data => res.send(data))
       .catch(next)
   );

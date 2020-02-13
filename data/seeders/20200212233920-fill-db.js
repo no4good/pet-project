@@ -4,10 +4,8 @@ export default {
   up: async (queryInterface, Sequelize) => {
     try {
       // Add users.
-      const usersMappedSeed = usersSeed.map((user, i) => ({
-        ...user
-      }));
-      await queryInterface.bulkInsert("users", usersMappedSeed, {});
+
+      await queryInterface.bulkInsert("users", usersSeed, {});
     } catch (err) {
       console.log(`Seeding error: ${err}`);
     }
